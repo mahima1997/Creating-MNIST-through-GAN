@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[12]:
+# author: mahima
 
 
 import os
@@ -17,10 +17,6 @@ from keras.datasets import mnist
 from keras.optimizers import Adam
 from keras import initializers
 
-
-# In[13]:
-
-
 # Let Keras know that we are using tensorflow as our backend engine
 os.environ["KERAS_BACKEND"] = "tensorflow"
 
@@ -29,10 +25,6 @@ np.random.seed(10)
 
 # The dimension of our random noise vector to feed into the generator.
 random_dim = 100
-
-
-# In[14]:
-
 
 def load_minst_data():
     # load the numpy data
@@ -47,10 +39,6 @@ def load_minst_data():
     # 784 columns per row
     x_train = x_train.reshape(60000, 784)
     return (x_train, y_train, x_test, y_test)
-
-
-# In[15]:
-
 
 # You will use the Adam optimizer
 def get_optimizer():
@@ -98,10 +86,6 @@ def get_discriminator(optimizer):
     discriminator.compile(loss='binary_crossentropy', optimizer=optimizer)
     return discriminator
 
-
-# In[16]:
-
-
 #The get_gan_network() function puts together the generator and the discriminator while keeping
 #only one of them trainable at a time.
 
@@ -119,10 +103,6 @@ def get_gan_network(discriminator, random_dim, generator, optimizer):
     gan.compile(loss='binary_crossentropy', optimizer=optimizer)
     return gan
 
-
-# In[17]:
-
-
 # Create a wall of generated MNIST images
 def plot_generated_images(epoch, generator, examples=100, dim=(10, 10), figsize=(10, 10)):
     noise = np.random.normal(0, 1, size=[examples, random_dim])
@@ -136,10 +116,6 @@ def plot_generated_images(epoch, generator, examples=100, dim=(10, 10), figsize=
         plt.axis('off')
     plt.tight_layout()
     plt.savefig('gan_generated_image_epoch_%d.png' % epoch)
-
-
-# In[ ]:
-
 
 def train(epochs=1, batch_size=128):
     # Get the training and testing data
@@ -187,11 +163,6 @@ def train(epochs=1, batch_size=128):
 
         if e == 1 or e % 20 == 0:
             plot_generated_images(e, generator)
-
-
-
-# In[ ]:
-
 
 
 if __name__ == '__main__':
